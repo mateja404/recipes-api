@@ -1,10 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocument, User } from '../schema/user.schema';
 import { Types } from 'mongoose';
 import { MailerService } from '@nestjs-modules/mailer';
 import { v4 as uuidv4 } from 'uuid';
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UserService {
@@ -36,5 +37,23 @@ export class UserService {
       text: message,
     });
     return { message: "Reset link has been sent to your email" };
+  }
+
+  async changePassword(userId: Types.ObjectId, newPw: string): Promise<{ message }> {
+    const user = await this.userModel.findById(userId).exec();
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    const existingPw = user.password;
+
+    const matchingPw = existingPw == newPw;
+    if (matchingPw) {
+      throw new ConflictException("Password is already in use");
+    }
+
+    user.password = newPw;
+    await user.save();
+    return { message: "Password has been changed successfully" };
   }
 }

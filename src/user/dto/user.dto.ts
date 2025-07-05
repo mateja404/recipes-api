@@ -5,3 +5,9 @@ export class ChangeEmailDto {
   @IsEmail()
   email: string;
 }
+
+export class ChangePwDto {
+  @IsNotEmpty()
+  @IsString()
+  newPassword: string;
+}

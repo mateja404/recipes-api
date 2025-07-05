@@ -5,7 +5,7 @@ import { IpBanGuard } from '../guards/ip.guard';
 import { PrivilageGuard } from '../guards/privilage.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
-import { ChangeEmailDto } from './dto';
+import { ChangeEmailDto, ChangePwDto } from './dto';
 import { RequestWithUser } from '../common/interfaces/request-with-user.interface';
 import { Types } from 'mongoose';
 
@@ -25,5 +25,12 @@ export class UserController {
   forgotPass(@Req() req: RequestWithUser) {
     const userId = req.user.sub;
     return this.userService.forgotPassword(new Types.ObjectId(userId));
+  }
+
+  @UseGuards(AuthGuard, IpBanGuard)
+  @Patch('/changepassword')
+  changePW(@Req() req: RequestWithUser, dto: ChangePwDto) {
+    const userId = req.user.sub;
+    return this.userService.changePassword(new Types.ObjectId(userId), dto.newPassword);
   }
 }
