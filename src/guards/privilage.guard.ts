@@ -35,8 +35,6 @@ export class PrivilageGuard implements CanActivate {
         const editorRole = payload.role;
         const recipeId = request.params.id;
 
-        console.log("Editor ID iz tokena (u guardu):", editorId);
-
         if (!recipeId) {
             throw new ForbiddenException("Recipe ID not provided in URL.");
         }

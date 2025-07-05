@@ -27,18 +27,4 @@ export class AuthController {
         console.log(dto)
         return this.authService.login(dto.email, dto.password);
     }
-
-    @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
-    @Roles(Role.Admin)
-    @Get('profile')
-    getUsers() {
-        return this.authService.getusers();
-    }
-
-    @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
-    @Roles(Role.Admin)
-    @Post('banip')
-    banIp(@Body() dto: BanIpDto) {
-        return this.authService.banIp(dto.userId, dto.ip, dto.reason);
-    }
 }

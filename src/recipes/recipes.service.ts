@@ -55,5 +55,33 @@ export class RecipesService {
         return { message: "Recipe successfully created" };
     }
 
-    async patchRecipe(id: Types.ObjectId, userId?: Types.ObjectId, title?: string, recipeText?: string) {}
+    async patchRecipe(id: Types.ObjectId, userId?: Types.ObjectId, title?: string, recipeText?: string): Promise<{ message }> {
+        const user = await this.userModel.findById(userId);
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        const updateFields: { title?: string; recipeText?: string } = {};
+        if (title !== undefined) {
+            updateFields.title = title;
+        }
+        if (recipeText !== undefined) {
+            updateFields.recipeText = recipeText;
+        }
+
+        if (Object.keys(updateFields).length === 0) {
+            const existingRecipe = await this.recipeModel.findById(id).exec();
+            if (!existingRecipe) {
+                throw new NotFoundException("Recipe not found.");
+            }
+            return { message: "There is nothing to change" };
+        }
+
+        const updatedRecipe = await this.recipeModel.findOneAndUpdate( { _id: id }, updateFields).exec();
+        if (!updatedRecipe) {
+            throw new NotFoundException("Recipe not found");
+        }
+
+        return { message: "Recipe edited successfully" };
+    }
 }

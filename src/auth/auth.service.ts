@@ -45,25 +45,4 @@ export class AuthService {
 
     return { message: "You're logged in!", token: token, banned: existingUser.banned };
   }
-
-  async getusers(): Promise<{ users }> {
-    const users = await this.userModel.find();
-    return { users };
-  }
-
-  async banIp(userId: Types.ObjectId, ip: string, reason: string): Promise<{ message }> {
-    const user = await this.userModel.findOne({ _id: userId });
-    if (!user) {
-      return new NotFoundException("User not found");
-    }
-
-    user.banned = true;
-    const newban = await this.bannedModel.create({
-      ip: ip,
-      reason: reason
-    });
-    user.save();
-
-    return { message: "Successfully" };
-  }
 }

@@ -28,13 +28,13 @@ export class RecipesController {
 
     @UseGuards(AuthGuard, IpBanGuard)
     @Roles(Role.Cook)
-    @Post('/create-recipe')
+    @Post('/createrecipe')
     createRecipe(@Body() dto: CreateRecipeDto) {
         return this.recipesService.createRecipe(dto.userId, dto.title, dto.recipeText);
     }
 
     @UseGuards(AuthGuard, IpBanGuard, PrivilageGuard)
-    @Patch(':id')
+    @Patch('/patchrecipe/:id')
     async updateRecipe(@Param('id') id: Types.ObjectId, @Body() dto: PatchRecipeDto,) {
     return this.recipesService.patchRecipe(id, dto.userId, dto.title, dto.recipeText);
     }
