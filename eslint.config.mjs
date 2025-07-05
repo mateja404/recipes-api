@@ -1,34 +1,32 @@
-// @ts-check
-import eslint from '@eslint/js';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default defineConfig([
   {
-    ignores: ['eslint.config.mjs'],
-  },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  eslintPluginPrettierRecommended,
-  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-      },
-      sourceType: 'commonjs',
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
+      globals: globals.browser,
+    },
+    plugins: {
+      // Nema potrebe za dodavanjem js kao plugin
+    },
+    extends: [
+      // Uključuje sve osnovne preporučene JS pravila
+      "eslint:recommended",
+      // Dodaj TypeScript preporučena pravila
+      "plugin:@typescript-eslint/recommended",
+    ],
+    parserOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',
     },
   },
   {
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
-    },
+    files: ["**/*.{ts,mts,cts}"],
+    extends: [
+      // Preporučena konfiguracija za TypeScript
+      tseslint.configs['recommended'],
+    ],
   },
-);
+]);

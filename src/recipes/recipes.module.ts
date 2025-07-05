@@ -8,7 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { BannedSchema, Banned } from 'src/schema/ipban.schema';
 
 @Module({
-  imports: [JwtModule.register({ secret: "superscarysceletons123421scarry", signOptions: { expiresIn: "3h" } }), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), MongooseModule.forFeature([{ name: Recipe.name, schema: RecipeSchema }]), MongooseModule.forFeature([{ name: Banned.name, schema: BannedSchema }])],
+  imports: [JwtModule.register({ secret: process.env.JWT_SECRET, signOptions: { expiresIn: "3h" } }), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), MongooseModule.forFeature([{ name: Recipe.name, schema: RecipeSchema }]), MongooseModule.forFeature([{ name: Banned.name, schema: BannedSchema }])],
   controllers: [RecipesController],
   providers: [RecipesService]
 })

@@ -25,6 +25,10 @@ export class RecipesService {
             throw new NotFoundException("Recipe not found");
         }
 
+        if (!(recipe.userId instanceof Types.ObjectId)) {
+            recipe.userId = new Types.ObjectId(recipe.userId);
+        }
+
         if (user.role !== 'admin' && !recipe.userId.equals(userId)) {
             throw new ForbiddenException("You are not allowed to delete this recipe");
         }

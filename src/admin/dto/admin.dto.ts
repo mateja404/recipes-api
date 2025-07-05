@@ -13,3 +13,9 @@ export class BanIpDto {
   @IsString()
   reason: string
 }
+
+export class BanUserDto {
+  @IsNotEmpty()
+  @IsString()
+  reason: string;
+}

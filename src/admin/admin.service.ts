@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { UserDocument, User } from 'src/schema/user.schema';
@@ -16,7 +16,7 @@ export class AdminService {
     async banIp(userId: Types.ObjectId, ip: string, reason: string): Promise<{ message }> {
         const user = await this.userModel.findOne({ _id: userId });
         if (!user) {
-            return new NotFoundException("User not found");
+            throw new NotFoundException("User not found");
         }
 
         user.banned = true;
@@ -27,5 +27,22 @@ export class AdminService {
         user.save();
 
         return { message: "Successfully" };
+    }
+
+    async banUser(id, adminId, reason) {
+        const bannedUser = await this.userModel.findOneAndUpdate({ _id: id }, { $set: { banned: true } });
+        if (bannedUser?.role == 'admin') {
+            throw new ForbiddenException("You can't ban admins!");
+        }
+        if (!bannedUser) {
+            throw new NotFoundException("User not found");
+        }
+
+        const admin = await this.userModel.findById(adminId);
+        if (!admin) {
+            throw new NotFoundException("Admin not found");
+        }
+
+        return { message: "User has been successfully banned" };
     }
 }
