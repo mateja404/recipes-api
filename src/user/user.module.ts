@@ -6,7 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../schema/user.schema';
 import { ConfigModule } from '@nestjs/config';
 import { Banned, BannedSchema } from '../schema/ipban.schema';
-import { MailerService, MailerModule, MAILER_OPTIONS } from '@nestjs-modules/mailer';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [

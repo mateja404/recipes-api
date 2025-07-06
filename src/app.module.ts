@@ -8,9 +8,10 @@ import { RecipesModule } from './recipes/recipes.module';
 import { AdminService } from './admin/admin.service';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
-  imports: [AuthModule, MongooseModule.forRoot('mongodb://localhost:27017/recipes-api'), ThrottlerModule.forRoot({ throttlers: [ { ttl: 60000, limit: 5, }, ], }), RecipesModule, AdminModule, UserModule],
+  imports: [AuthModule, MongooseModule.forRoot('mongodb://localhost:27017/recipes-api'), ThrottlerModule.forRoot({ throttlers: [ { ttl: 60000, limit: 5, }, ], }), RecipesModule, AdminModule, UserModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

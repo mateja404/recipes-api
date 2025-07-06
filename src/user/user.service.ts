@@ -31,7 +31,7 @@ export class UserService {
     const message = `Forgot your password? \nReset it in in provided link http://localhost:3000/forgotpassword/reset/${linkId} \nIf you didn't forget your password, please ignore this email!`;
 
     this.mailService.sendMail({
-      from: 'Recipes API',
+      from: 'Recipes API <recipeapi@murkoff.com>',
       to: user.email,
       subject: `Urgent! Recipes API forgot password`,
       text: message,
