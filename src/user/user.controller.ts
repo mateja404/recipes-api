@@ -15,22 +15,29 @@ export class UserController {
 
   @UseGuards(AuthGuard, IpBanGuard)
   @Patch('/changeemail')
-  changeEmail(@Body() dto: ChangeEmailDto, @Req() req: RequestWithUser) {
+  changeEmail(@Body() dto: ChangeEmailDto, @Req() req: RequestWithUser): Promise<{ message }> {
     const userId = req.user.sub;
     return this.userService.changeUserEmail(new Types.ObjectId(userId), dto.email);
   }
 
   @UseGuards(AuthGuard, IpBanGuard)
   @Patch('/forgotpassword')
-  forgotPass(@Req() req: RequestWithUser) {
+  forgotPass(@Req() req: RequestWithUser): Promise<{ message }> {
     const userId = req.user.sub;
     return this.userService.forgotPassword(new Types.ObjectId(userId));
   }
 
   @UseGuards(AuthGuard, IpBanGuard)
   @Patch('/changepassword')
-  changePW(@Req() req: RequestWithUser, dto: ChangePwDto) {
+  changePW(@Req() req: RequestWithUser, dto: ChangePwDto): Promise<{ message }> {
     const userId = req.user.sub;
     return this.userService.changePassword(new Types.ObjectId(userId), dto.newPassword);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('/getuserinfo')
+  getUserInfo(@Req() req: RequestWithUser): Promise<{ user }> {
+    const userId = req.user.sub;
+    return this.userService.getUserInfo(new Types.ObjectId(userId));
   }
 }

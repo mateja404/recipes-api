@@ -56,4 +56,10 @@ export class UserService {
     await user.save();
     return { message: "Password has been changed successfully" };
   }
+
+  async getUserInfo(userId: Types.ObjectId): Promise<{ user }> {
+    const user = await this.userModel.findById(userId);
+
+    return { user };
+  }
 }

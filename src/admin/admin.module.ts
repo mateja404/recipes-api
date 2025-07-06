@@ -2,15 +2,17 @@ import { Module } from '@nestjs/common';
 import { AdminController } from './admin.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../schema/user.schema';
-import { Banned, BannedSchema } from '../schema/ipban.schema';
+import { IPBans, IPBansSchema } from '../schema/ipban.schema';
 import { AdminService } from './admin.service';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
+import { Bans, BansSchema } from 'src/schema/bans.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
-      { name: Banned.name, schema: BannedSchema }
+      { name: IPBans.name, schema: IPBansSchema },
+      { name: Bans.name, schema: BansSchema }
     ]),
     JwtModule.register({ secret: process.env.JWT_SECRET, signOptions: { expiresIn: "3h" } })
   ],

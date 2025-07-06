@@ -14,16 +14,16 @@ export class AdminController {
 
     @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
     @Roles(Role.Admin)
-    @Get('/profile')
+    @Get('/getusers')
     getUsers() {
         return this.adminService.getusers();
     }
 
     @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
     @Roles(Role.Admin)
-    @Post('/banip')
-    banIp(@Body() dto: BanIpDto) {
-        return this.adminService.banIp(dto.userId, dto.ip, dto.reason);
+    @Post('/banip/:id')
+    banIp(@Param('id') ipToBan: Types.ObjectId, @Req() req: RequestWithUser, @Body() dto: BanUserDto) {
+        return this.adminService.banIp(ipToBan, dto.reason);
     }
 
     @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
@@ -32,5 +32,12 @@ export class AdminController {
     banUser(@Param('id') bannedUserId: Types.ObjectId, @Req() req: RequestWithUser, @Body() dto: BanUserDto) {
         const adminId = req.user.sub
         return this.adminService.banUser(bannedUserId, adminId, dto.reason);
+    }
+
+    @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
+    @Roles(Role.Admin)
+    @Patch('/unbanuser/:id')
+    unbanUser(@Param('id') bannedUserId: Types.ObjectId, @Req() req: RequestWithUser) {
+        return this.adminService.unbanUser(bannedUserId);
     }
 }

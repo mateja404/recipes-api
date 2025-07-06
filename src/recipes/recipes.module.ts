@@ -5,10 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schema/user.schema';
 import { Recipe, RecipeSchema } from 'src/schema/recipe.schema';
 import { JwtModule } from '@nestjs/jwt';
-import { BannedSchema, Banned } from 'src/schema/ipban.schema';
+import { IPBansSchema, IPBans } from 'src/schema/ipban.schema';
 
 @Module({
-  imports: [JwtModule.register({ secret: process.env.JWT_SECRET, signOptions: { expiresIn: "3h" } }), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), MongooseModule.forFeature([{ name: Recipe.name, schema: RecipeSchema }]), MongooseModule.forFeature([{ name: Banned.name, schema: BannedSchema }])],
+  imports: [JwtModule.register({ secret: process.env.JWT_SECRET, signOptions: { expiresIn: "3h" } }), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), MongooseModule.forFeature([{ name: Recipe.name, schema: RecipeSchema }]), MongooseModule.forFeature([{ name: IPBans.name, schema: IPBansSchema }])],
   controllers: [RecipesController],
   providers: [RecipesService]
 })

@@ -5,11 +5,11 @@ import { User, UserDocument } from '../schema/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Types } from 'mongoose';
-import { Banned, BannedDocument } from 'src/schema/ipban.schema';
+import { IPBans, IPBansDocument } from 'src/schema/ipban.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private jwtService: JwtService, @InjectModel(Banned.name) private bannedModel: Model<BannedDocument>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private jwtService: JwtService, @InjectModel(IPBans.name) private bannedModel: Model<IPBansDocument>) {}
 
   async register(username: string, email: string, password: string): Promise<{ message }> {
     const existingUser = await this.userModel.findOne({ email: email });

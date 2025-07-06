@@ -2,10 +2,11 @@ import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@
 import { Request } from "express";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { IPBans } from "src/schema/ipban.schema";
 
 @Injectable()
 export class IpBanGuard implements CanActivate {
-    constructor(@InjectModel("Banned") private bannedModel: Model<any>) {}
+    constructor(@InjectModel(IPBans.name) private bannedModel: Model<any>) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest<Request>();

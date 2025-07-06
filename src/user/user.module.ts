@@ -5,7 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../schema/user.schema';
 import { ConfigModule } from '@nestjs/config';
-import { Banned, BannedSchema } from '../schema/ipban.schema';
+import { IPBans, IPBansSchema } from '../schema/ipban.schema';
 import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
@@ -13,7 +13,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
     ConfigModule.forRoot({ isGlobal: true }),
     JwtModule.register({ secret: process.env.JWT_TOKEN, signOptions: { expiresIn: '3h' } }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: Banned.name, schema: BannedSchema }]),
+    MongooseModule.forFeature([{ name: IPBans.name, schema: IPBansSchema }]),
     MailerModule.forRoot({
       transport: {
         service: "gmail",

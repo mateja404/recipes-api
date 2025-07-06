@@ -4,7 +4,7 @@ import { CommentsController } from './comments.controller';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Banned, BannedSchema } from 'src/schema/ipban.schema';
+import { IPBans, IPBansSchema } from 'src/schema/ipban.schema';
 import { User, UserSchema } from 'src/schema/user.schema';
 
 @Module({
@@ -12,7 +12,7 @@ import { User, UserSchema } from 'src/schema/user.schema';
       ConfigModule.forRoot({ isGlobal: true }),
       JwtModule.register({ secret: process.env.JWT_TOKEN, signOptions: { expiresIn: '3h' } }),
       MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-      MongooseModule.forFeature([{ name: Banned.name, schema: BannedSchema }]),
+      MongooseModule.forFeature([{ name: IPBans.name, schema: IPBansSchema }]),
     ],
   providers: [CommentsService],
   controllers: [CommentsController]
