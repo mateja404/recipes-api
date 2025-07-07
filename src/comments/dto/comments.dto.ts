@@ -3,5 +3,6 @@ import { Types } from "mongoose";
 
 export class CreateCommentDto {
     @IsNotEmpty()
-    recipeId: Types.ObjectId;
+    @IsString()
+    comment: string;
 }

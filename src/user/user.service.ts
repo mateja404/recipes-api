@@ -62,4 +62,16 @@ export class UserService {
 
     return { user };
   }
+
+  async updateAiSlots(userId: Types.ObjectId): Promise<{ aiSlots: number }> {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.aiSlots -= 1;
+    await user.save();
+
+    return { aiSlots: user.aiSlots };
+  }
 }

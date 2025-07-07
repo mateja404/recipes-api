@@ -14,7 +14,7 @@ export class RecipesService {
         return { recipes: recipes };
     }
 
-    async deleteRecipeById(userId: Types.ObjectId, recipeId: Types.ObjectId): Promise<any> {
+    async deleteRecipeById(userId: Types.ObjectId, recipeId: Types.ObjectId): Promise<{ message }> {
         const user = await this.userModel.findById(userId);
         if (!user) {
             throw new NotFoundException("User not found");

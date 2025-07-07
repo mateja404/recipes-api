@@ -23,9 +23,6 @@ export class DeleteRecipeDto {
 }
 
 export class PatchRecipeDto {
-    @IsNotEmpty()
-    userId?: Types.ObjectId;
-
     @IsOptional()
     @IsString()
     title?: string;

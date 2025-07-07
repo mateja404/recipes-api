@@ -15,10 +15,13 @@ export class User {
   password: string;
 
   @Prop({ required: true })
-  role: string
+  role: string;
 
   @Prop({ required: true })
-  banned: boolean
+  banned: boolean;
+
+  @Prop({ default: 100 })
+  aiSlots: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
