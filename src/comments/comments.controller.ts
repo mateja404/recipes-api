@@ -13,7 +13,7 @@ export class CommentsController {
 
     @UseGuards(AuthGuard, IpBanGuard)
     @Post('/postcomment/:id')
-    postComment(@Param('id') id: Types.ObjectId, @Req() req: RequestWithUser, @Body() dto: CreateCommentDto) {
+    createComment(@Param('id') id: Types.ObjectId, @Req() req: RequestWithUser, @Body() dto: CreateCommentDto) {
         const posterId = new Types.ObjectId(req.user.sub);
         return this.commentsService.createComment(id, posterId, dto.comment);
     }

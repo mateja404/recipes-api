@@ -9,32 +9,26 @@ export class RecipesService {
     constructor(@InjectModel(Recipe.name) private recipeModel: Model<RecipeDocument>, @InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
     async getAllRecipes(): Promise<{ recipes }> {
-        const recipes = await this.recipeModel.find({});
+        const recipes = await this.recipeModel.find({}).exec();
 
         return { recipes: recipes };
     }
 
-    async deleteRecipeById(userId: Types.ObjectId, recipeId: Types.ObjectId): Promise<{ message }> {
-        const user = await this.userModel.findById(userId);
+    async deleteRecipeById(userId: Types.ObjectId, recipeId: Types.ObjectId) {
+        const user = await this.userModel.findById(userId).exec();
         if (!user) {
             throw new NotFoundException("User not found");
         }
-
-        const recipe = await this.recipeModel.findById(recipeId);
+        const recipe = await this.recipeModel.findById(recipeId).exec();
         if (!recipe) {
             throw new NotFoundException("Recipe not found");
         }
 
-        if (!(recipe.userId instanceof Types.ObjectId)) {
-            recipe.userId = new Types.ObjectId(recipe.userId);
-        }
-
-        if (user.role !== 'admin' && !recipe.userId.equals(userId)) {
+        if (user.role !== 'admin' && recipe.userId.toString() !== userId.toString()) {
             throw new ForbiddenException("You are not allowed to delete this recipe");
         }
 
         await recipe.deleteOne();
-
         return { message: "Recipe successfully deleted" };
     }
 

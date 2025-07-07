@@ -3,10 +3,9 @@ import { UserService } from './user.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { MailerService } from '@nestjs-modules/mailer';
 import { NotFoundException, ConflictException } from '@nestjs/common';
-import { Model, Types } from 'mongoose';
-import { User, UserDocument } from '../schema/user.schema';
+import { Types } from 'mongoose';
+import { User } from '../schema/user.schema';
 
-// Mocks
 const userId = new Types.ObjectId();
 const mockUser = {
   _id: userId,
@@ -16,7 +15,6 @@ const mockUser = {
   save: jest.fn().mockResolvedValue(true),
 };
 
-// Kreiramo mock za mongoose model
 const mockUserModel = {
   findById: jest.fn().mockReturnValue({
     exec: jest.fn()
@@ -33,7 +31,6 @@ describe('UserService', () => {
   beforeEach(async () => {
     jest.clearAllMocks();
     
-    // Reset mock-a za svaki test
     mockUserModel.findById.mockReturnValue({
       exec: jest.fn()
     });
