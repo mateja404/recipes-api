@@ -28,7 +28,6 @@ export class RecipesController {
     @Post('/createrecipe')
     createRecipe(@Body() dto: CreateRecipeDto, @Req() req: RequestWithUser) {
         const userId = req.user.sub;
-        console.log(userId)
         return this.recipesService.createRecipe(new Types.ObjectId(userId), dto.title, dto.recipeText);
     }
 

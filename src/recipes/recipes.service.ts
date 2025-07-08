@@ -33,12 +33,12 @@ export class RecipesService {
     }
 
     async createRecipe(userId: Types.ObjectId, title: string, recipeText: string): Promise<{ message }> {
-        const user = await this.userModel.findById(userId);
+        const user = await this.userModel.findById(userId).exec();
         if (!user) {
             throw new NotFoundException("User not found");
         }
 
-        const existingRecipe = await this.recipeModel.findOne({ title: title });
+        const existingRecipe = await this.recipeModel.findOne({ title: title }).exec();
         if (existingRecipe) {
             throw new ConflictException("Recipe with this title already exist");
         }
@@ -54,7 +54,7 @@ export class RecipesService {
     }
 
     async patchRecipe(id: Types.ObjectId, userId?: Types.ObjectId, title?: string, recipeText?: string): Promise<{ message }> {
-        const user = await this.userModel.findById(userId);
+        const user = await this.userModel.findById(userId).exec();
         if (!user) {
             throw new NotFoundException("User not found");
         }
