@@ -16,13 +16,13 @@ export class AdminController {
     @Roles(Role.Admin)
     @Get('/getusers')
     getUsers() {
-        return this.adminService.getusers();
+        return this.adminService.getUsers();
     }
 
     @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
     @Roles(Role.Admin)
     @Post('/banip/:id')
-    banIp(@Param('id') ipToBan: Types.ObjectId, @Req() req: RequestWithUser, @Body() dto: BanUserDto) {
+    banIp(@Param('id') ipToBan: string, @Body() dto: BanUserDto) {
         return this.adminService.banIp(ipToBan, dto.reason);
     }
 
@@ -37,7 +37,7 @@ export class AdminController {
     @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
     @Roles(Role.Admin)
     @Patch('/unbanuser/:id')
-    unbanUser(@Param('id') bannedUserId: Types.ObjectId, @Req() req: RequestWithUser) {
+    unbanUser(@Param('id') bannedUserId: Types.ObjectId) {
         return this.adminService.unbanUser(bannedUserId);
     }
 }
