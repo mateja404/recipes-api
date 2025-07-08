@@ -4,19 +4,15 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from '../schema/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Types } from 'mongoose';
-import { IPBans, IPBansDocument } from 'src/schema/ipban.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private jwtService: JwtService, @InjectModel(IPBans.name) private bannedModel: Model<IPBansDocument>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private jwtService: JwtService) {}
 
   async register(username: string, email: string, password: string): Promise<{ message }> {
-    const existingUser = await this.userModel.findOne({ email: email });
-    console.log(username, email, password)
-    
+    const existingUser = await this.userModel.findOne({ email: email }).exec();
     if (existingUser) {
-        throw new ConflictException("User already exist");
+      throw new ConflictException("User already exist");
     }
     const password_hash = await bcrypt.hash(password, 10);
 
@@ -31,7 +27,7 @@ export class AuthService {
   }
 
   async login(email: string, password: string): Promise<{ message, token, banned }> {
-    const existingUser = await this.userModel.findOne({ email: email });
+    const existingUser = await this.userModel.findOne({ email: email }).exec();
     if (!existingUser) {
       throw new NotFoundException("User not found");
     }
