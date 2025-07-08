@@ -5,7 +5,6 @@ import { Model, Types } from 'mongoose';
 import { User, UserDocument } from '../schema/user.schema';
 import { Recipe, RecipeDocument } from '../schema/recipe.schema';
 import { ConflictException, ForbiddenException, NotFoundException } from '@nestjs/common';
-import { JsonWebTokenError } from '@nestjs/jwt';
 
 describe('RecipesService', () => {
   let service: RecipesService;
@@ -275,13 +274,6 @@ describe('RecipesService', () => {
         password: 'hashed',
         banned: false,
         aiSlots: 100,
-      };
-      const regularRecipe = {
-        _id: recipeId,
-        userId: userId,
-        title: 'Pizza',
-        recipeText: 'Ill teach you how to make excellent italian pizza',
-        author: 'matke'
       };
 
       jest.spyOn(userModel, 'findById').mockReturnValue({

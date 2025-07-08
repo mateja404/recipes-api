@@ -10,12 +10,12 @@ export class CommentsService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, @InjectModel(Recipe.name) private recipeModel: Model<RecipeDocument>, private readonly notificationsService: NotificationsService) {}
 
     async createComment(id: Types.ObjectId, posterId: Types.ObjectId, comment: string) {
-        const recipe = await this.recipeModel.findByIdAndUpdate(id,{ $push: { comments: comment } },{ new: true });
+        const recipe = await this.recipeModel.findByIdAndUpdate(id,{ $push: { comments: comment } },{ new: true }).exec();
         if (!recipe) {
             throw new NotFoundException("Recipe not found");
         }
 
-        const poster = await this.userModel.findById(posterId);
+        const poster = await this.userModel.findById(posterId).exec();
         if (!poster) {
             throw new NotFoundException("User not found");
         }
