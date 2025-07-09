@@ -1,10 +1,10 @@
 import { Controller, Body, Req, Param, Get, Post, Patch, Delete, UseGuards } from '@nestjs/common';
 import { CommentsService } from './comments.service';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { IpBanGuard } from 'src/guards/ip.guard';
-import { PrivilageGuard } from 'src/guards/privilage.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { IpBanGuard } from '../guards/ip.guard';
+import { PrivilageGuard } from '../guards/privilage.guard';
 import { CreateCommentDto } from './dto';
-import { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
+import { RequestWithUser } from '../common/interfaces/request-with-user.interface';
 import { Types } from 'mongoose';
 
 @Controller('comments')

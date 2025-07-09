@@ -1,9 +1,9 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { UserDocument, User } from 'src/schema/user.schema';
-import { Bans, BansDocument } from 'src/schema/bans.schema';
-import { IPBans, IPBansDocument } from 'src/schema/ipban.schema';
+import { UserDocument, User } from '../schema/user.schema';
+import { Bans, BansDocument } from '../schema/bans.schema';
+import { IPBans, IPBansDocument } from '../schema/ipban.schema';
 
 @Injectable()
 export class AdminService {

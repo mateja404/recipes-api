@@ -1,7 +1,7 @@
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
-import { IpBanGuard } from 'src/guards/ip.guard';
+import { IpBanGuard } from '../guards/ip.guard';
 
 @Controller('auth')
 export class AuthController {

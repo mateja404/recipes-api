@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, UseGuards, Patch, Param, Req } from '@nestjs/common';
 import { AdminService } from './admin.service';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Roles, Role } from 'src/decorators/roles.decorator';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { IpBanGuard } from 'src/guards/ip.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles, Role } from '../decorators/roles.decorator';
+import { AuthGuard } from '../guards/auth.guard';
+import { IpBanGuard } from '../guards/ip.guard';
 import { Types } from 'mongoose';
 import { RequestWithUser } from '../common/interfaces/request-with-user.interface';
 import { BanUserDto, BanIpDto } from './dto';
