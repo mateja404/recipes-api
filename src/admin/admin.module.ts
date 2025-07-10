@@ -5,7 +5,7 @@ import { User, UserSchema } from '../schema/user.schema';
 import { IPBans, IPBansSchema } from '../schema/ipban.schema';
 import { AdminService } from './admin.service';
 import { JwtModule } from '@nestjs/jwt';
-import { Bans, BansSchema } from 'src/schema/bans.schema';
+import { Bans, BansSchema } from '../schema/bans.schema';
 
 @Module({
   imports: [

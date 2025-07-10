@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@
 import { Request } from "express";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { IPBans } from "src/schema/ipban.schema";
+import { IPBans } from "../schema/ipban.schema";
 
 @Injectable()
 export class IpBanGuard implements CanActivate {

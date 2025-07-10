@@ -4,11 +4,11 @@ import { CommentsController } from './comments.controller';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { IPBans, IPBansSchema } from 'src/schema/ipban.schema';
-import { User, UserSchema } from 'src/schema/user.schema';
-import { Recipe, RecipeSchema } from 'src/schema/recipe.schema';
-import { NotificationsService } from 'src/notifications/notifications.service';
-import { NotificationsModule } from 'src/notifications/notifications.module';
+import { IPBans, IPBansSchema } from '../schema/ipban.schema';
+import { User, UserSchema } from '../schema/user.schema';
+import { Recipe, RecipeSchema } from '../schema/recipe.schema';
+import { NotificationsService } from '../notifications/notifications.service';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [

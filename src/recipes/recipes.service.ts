@@ -1,8 +1,8 @@
 import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Recipe, RecipeDocument } from 'src/schema/recipe.schema';
-import { User, UserDocument } from 'src/schema/user.schema';
+import { Recipe, RecipeDocument } from '../schema/recipe.schema';
+import { User, UserDocument } from '../schema/user.schema';
 
 @Injectable()
 export class RecipesService {

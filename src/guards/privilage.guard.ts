@@ -3,8 +3,8 @@ import { Request } from "express";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { JwtService } from "@nestjs/jwt";
-import { Recipe, RecipeDocument } from "src/schema/recipe.schema";
-import { RequestWithUser } from "src/common/interfaces/request-with-user.interface";
+import { Recipe, RecipeDocument } from "../schema/recipe.schema";
+import { RequestWithUser } from "../common/interfaces/request-with-user.interface";
 
 @Injectable()
 export class PrivilageGuard implements CanActivate {

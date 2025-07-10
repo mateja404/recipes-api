@@ -1,11 +1,11 @@
 import { Controller, Body, Post, Get, Delete, UseGuards, Param, Patch, Req } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { IpBanGuard } from 'src/guards/ip.guard';
-import { PrivilageGuard } from 'src/guards/privilage.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { IpBanGuard } from '../guards/ip.guard';
+import { PrivilageGuard } from '../guards/privilage.guard';
 import { CreateRecipeDto, PatchRecipeDto } from './dto/recipe.dto';
 import { Types } from 'mongoose';
-import { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
+import { RequestWithUser } from '../common/interfaces/request-with-user.interface';
 
 @Controller('recipes')
 export class RecipesController {

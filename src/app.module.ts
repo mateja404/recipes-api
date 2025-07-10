@@ -12,7 +12,7 @@ import { CommentsModule } from './comments/comments.module';
 import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
-  imports: [AuthModule, MongooseModule.forRoot('mongodb://localhost:27017/recipes-api'), ThrottlerModule.forRoot({ throttlers: [ { ttl: 60000, limit: 5, }, ], }), RecipesModule, AdminModule, UserModule, CommentsModule, NotificationsModule],
+  imports: [AuthModule, MongooseModule.forRoot('mongodb+srv://kididrtina:Vodopad123@recipes-api.jo7bzor.mongodb.net/?retryWrites=true&w=majority&appName=recipes-api'), ThrottlerModule.forRoot({ throttlers: [ { ttl: 60000, limit: 5, }, ], }), RecipesModule, AdminModule, UserModule, CommentsModule, NotificationsModule],
   controllers: [AppController],
   providers: [AppService],
 })
