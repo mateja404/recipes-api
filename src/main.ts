@@ -11,7 +11,7 @@ async function bootstrap() {
   });
   app.use(helmet());
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     methods: 'GET, PUT, POST, DELETE, PATCH',
     allowedHeaders: 'Content-Type, Authorization',
   });
