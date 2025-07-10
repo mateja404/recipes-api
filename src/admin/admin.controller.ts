@@ -11,7 +11,7 @@ import { BanUserDto, BanIpDto } from './dto';
 @Controller('admin')
 export class AdminController {
     constructor(private readonly adminService: AdminService) {}
-
+    
     @UseGuards(AuthGuard, RolesGuard, IpBanGuard)
     @Roles(Role.Admin)
     @Get('/getusers')

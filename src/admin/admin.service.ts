@@ -8,7 +8,7 @@ import { IPBans, IPBansDocument } from 'src/schema/ipban.schema';
 @Injectable()
 export class AdminService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, @InjectModel(Bans.name) private bansModel: Model<BansDocument>, @InjectModel(IPBans.name) private bannedModel: Model<IPBansDocument>) {}
-
+    
     async getUsers(): Promise<{ users }> {
         const users = await this.userModel.find().exec();
         return { users };
