@@ -10,11 +10,6 @@ async function bootstrap() {
     fallbackOnErrors: true
   });
   app.use(helmet());
-  app.enableCors({
-    origin: '*',
-    methods: 'GET, PUT, POST, DELETE, PATCH',
-    allowedHeaders: 'Content-Type, Authorization',
-  });
   const expressApp = app.getHttpAdapter().getInstance();
   expressApp.set('trust proxy', true);
 }
